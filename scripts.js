@@ -1,3 +1,6 @@
+//getting the div with container class in the index.html
+const container = document.querySelector('.container');
+
 //array to contain the books
 let myLibrary = [];
 
@@ -7,6 +10,10 @@ function Book() {
     this.title = title;
     this.numberOfPages = numberOfPages;
     this.hasBeenRead = trueOrFalse;
+    const info = function() {
+        console.log(author, ' is the author of ', title, '. Have I read this book? ', 
+            trueOrFalse, '. There are ', numberOfPages, ' pages in this book.');
+    }
 }
 
 //adds book to the myLibrary array
@@ -38,9 +45,16 @@ sapiens.numberOfPages = 421;
 sapiens.hasBeenRead = true;
 addBookToLibrary(sapiens);
 
-console.log(myLibrary[2]);
+const indonesiaEtc = Object.create(Book);
+indonesiaEtc.author = 'elizabeth something';
+indonesiaEtc.title = 'Indonesia Etc';
+indonesiaEtc.numberOfPages = 350;
+indonesiaEtc.hasBeenRead = true;
+addBookToLibrary(indonesiaEtc);
 
-
-/*for(let i=0; i<myLibrary.length; i++) {
+//loops through and creates a container in the index.html file 
+for(let i=0; i<myLibrary.length; i++) {
+    let card = document.createElement('p');
+    container.appendChild(card);
     
-}*/
+}
