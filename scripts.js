@@ -54,8 +54,15 @@ addBookToLibrary(indonesiaEtc);
 
 //loops through and creates a container in the index.html file 
 for(let i=0; i<myLibrary.length; i++) {
+    //create element that will hold the book object information
     let card = document.createElement('p');
     container.appendChild(card);
+
+    /*create button that will be used to remove the cell that contains this book
+    then remove the book from the array*/
+    let button = document.createElement('button');
+    container.appendChild(button);
+    button.innerText = "Remove Book";
     
     let author = myLibrary[i].author;
     let title = myLibrary[i].title;
