@@ -1,13 +1,3 @@
-/*Issues
-    1. When I add a new book to myLibrary and update the page to
-        show the card associated with the book, I need to either
-            a) clear all cards and reload all cards now with the
-                new book in order to prevent duplicates
-            or
-            b) only add the new book and not loop through entire 
-                myLibrary which would create duplicates of all the 
-                books that were already displayed on page
-*/
 const addBookButton = document.getElementById('addBookButton');
 const addBookContainer = document.querySelector('.addBookContainer');
 
@@ -65,13 +55,7 @@ addBookButton.addEventListener('click', function() {
             submitButton.innerHTML = 'Submit';
         
             submitButton.addEventListener('click', function() {
-            /*1. clear the input fields 
-               2. create a new object with the input information
-               3. add object to the myLibrary array
-               4. does the for loop that creates the cards for each book
-                   need to be wrapped in a function so that I can call the
-                   function at the end of this in order for the new book to
-                   have its own card and remove button displayed on page?*/
+                //creates new object with the form values and adds the book to myLibrary
                 const newBook = Object.create(Book);
                 newBook.author = inputAuthor.value;
                 newBook.title = inputTitle.value;
@@ -79,6 +63,11 @@ addBookButton.addEventListener('click', function() {
                 newBook.hasBeenRead = inputRead.value;
                 myLibrary.push(newBook);
 
+                //deletes the form
+                formContainer.innerHTML = '';
+
+                //clears all existing cards then loops through to create cards for all myLibrary books
+                clearAllCards();
                 createCardLoop();
            
                 //form submitted and cleared, allows addBookButton to create another form
@@ -153,17 +142,50 @@ function createCardLoop() {
         let pages = myLibrary[i].numberOfPages;
         let read = myLibrary[i].hasBeenRead;
 
-        let str = author + ' wrote ' + title + ' it has ' + pages + ' pages ' + read;
+        let str = author + ' wrote ' + title + ' it has ' + pages + ' pages ';
 
         card.innerText = str;
 
-        //button is child of bookContainer
-        let button = document.createElement('button');
-        button.setAttribute('id', title);
-        bookContainer.appendChild(button);
-        button.innerText = "Remove Book";
+        //create container for readBookButton and readBookStatusContainer
+        let readBookContainer = document.createElement('div');
+        bookContainer.appendChild(readBookContainer);
 
-        button.addEventListener('click', function() {
+        /*necessary in order to clear readBookStatus off page
+        because in order to do so I need to clear innerHTML of its parent
+        without affecting anything else*/
+        let readBookStatusContainer = document.createElement('div');
+        readBookContainer.appendChild(readBookStatusContainer);
+
+        //button to indicate if the user has read the book or not
+        let readBookButton = document.createElement('button');
+        readBookContainer.appendChild(readBookButton);
+        readBookButton.innerHTML = 'Have you read this book?';
+
+        function createBeenReadText() {
+            let beenReadText = document.createElement('p');
+            readBookStatusContainer.appendChild(beenReadText);
+            beenReadText.innerHTML = myLibrary[i].hasBeenRead;
+        };
+
+        createBeenReadText();
+
+        readBookButton.addEventListener('click', function() {
+            if(read == false) {
+                myLibrary[i].hasBeenRead = true;
+            } else {
+                myLibrary[i].hasBeenRead = false;
+            }
+            readBookStatusContainer.innerHTML = '';
+            createBeenReadText();
+        })
+
+        //button to remove the book from list
+        let removeBookButton = document.createElement('button');
+        removeBookButton.setAttribute('id', title);
+        bookContainer.appendChild(removeBookButton);
+        removeBookButton.innerText = "Remove Book";
+
+        removeBookButton.addEventListener('click', function() {
             //1. remove the card that contains this book
             //this works because the id of the button does not change
             document.getElementById(i).innerHTML = '';
@@ -174,6 +196,10 @@ function createCardLoop() {
         }
         );
     }
+}
+
+function clearAllCards() {
+    container.innerHTML = '';
 }
 
 createCardLoop();
