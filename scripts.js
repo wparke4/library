@@ -25,8 +25,8 @@ function addBookToLibrary(book) {
 //adding values to their properties
 //adding them to myLibrary array
 const bible = Object.create(Book);
-bible.author = 'jesus';
-bible.title = 'bible';
+bible.author = 'Jesus';
+bible.title = 'Bible';
 bible.numberOfPages = 9000;
 bible.hasBeenRead = false;
 addBookToLibrary(bible);
@@ -39,14 +39,14 @@ harryPotter1.hasBeenRead = true;
 addBookToLibrary(harryPotter1);
 
 const sapiens = Object.create(Book);
-sapiens.author = 'yuval noah harrari';
-sapiens.title = 'sapiens';
+sapiens.author = 'Yuval Noah Harrari';
+sapiens.title = 'Sapiens';
 sapiens.numberOfPages = 421;
 sapiens.hasBeenRead = true;
 addBookToLibrary(sapiens);
 
 const indonesiaEtc = Object.create(Book);
-indonesiaEtc.author = 'elizabeth something';
+indonesiaEtc.author = 'Elizabeth Something';
 indonesiaEtc.title = 'Indonesia Etc';
 indonesiaEtc.numberOfPages = 350;
 indonesiaEtc.hasBeenRead = true;
@@ -57,4 +57,12 @@ for(let i=0; i<myLibrary.length; i++) {
     let card = document.createElement('p');
     container.appendChild(card);
     
+    let author = myLibrary[i].author;
+    let title = myLibrary[i].title;
+    let pages = myLibrary[i].numberOfPages;
+    let read = myLibrary[i].hasBeenRead;
+
+    let str = author + ' wrote ' + title + ' it has ' + pages + ' pages ' + read;
+
+    card.innerText = str;
 }
