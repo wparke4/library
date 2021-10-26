@@ -85,22 +85,22 @@ for(let i=0; i<myLibrary.length; i++) {
         //2. remove book from myLibrary array
         //add title of book to be removed to the removeBook library
         removeBook.push(title);
-        
+        compareAndRemove();
+    }
+    );
+}
+
+//loop through each book in myLibrary array
+function compareAndRemove() {
+    for(let i=0; i<myLibrary.length; i++) {
         for(a=0; a<removeBook.length; a++) {
             let trigger = true;
-            if(myLibrary.length == 0) {
-                return;
-            }
             if(removeBook[a] == myLibrary[i].title) {
-                trigger = false;
+            trigger = false;
             }
             if(trigger === false) {
                 myLibrary.splice(i, 1);
             }
         }
     }
-    );
 }
-
-//loop through each book in myLibrary array
-//for(let i=0; i<myLibrary.length)
