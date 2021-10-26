@@ -1,3 +1,66 @@
+const addBookButton = document.getElementById('addBookButton');
+const addBookContainer = document.querySelector('.addBookContainer');
+
+const typeOfInput = ['Author', 'Title', 'Book Length']
+
+/*form must be submitted and cleared before addBookButton can create
+    another form*/
+let hasBeenEntered = false;
+
+addBookButton.addEventListener('click', function() {
+    if(hasBeenEntered === false) {
+        hasBeenEntered = true;
+
+        const formContainer = document.createElement('div');
+        addBookContainer.appendChild(formContainer);
+    
+        const formAuthor = document.createElement('p');
+        formContainer.appendChild(formAuthor);
+        formAuthor.innerHTML = 'Author';
+
+        const inputAuthor = document.createElement('input');
+        formContainer.appendChild(inputAuthor);
+
+        const formTitle = document.createElement('p');
+        formContainer.appendChild(formTitle);
+        formTitle.innerHTML = 'Title';
+
+        const inputTitle = document.createElement('input');
+        formContainer.appendChild(inputTitle);
+
+        const formPages = document.createElement('p');
+        formContainer.appendChild(formPages);
+        formPages.innerHTML = 'Book Length';
+
+        const inputPages = document.createElement('input');
+        formContainer.appendChild(inputPages);
+
+        const formRead = document.createElement('p');
+        formContainer.appendChild(formRead);
+        formRead.innerHTML = 'Have you read this book?';
+
+        const inputRead = document.createElement('input');
+        formContainer.appendChild(inputRead);
+
+        const submitButton = document.createElement('button');
+        formContainer.appendChild(submitButton);
+        submitButton.innerHTML = 'Submit';
+        submitButton.addEventListener('click', function() {
+            /*1. clear the input fields 
+               2. create a new object with the input imformation
+               3. add object to the myLibrary array
+               4. does the for loop that creates the cards for each book
+                   need to be wrapped in a function so that I can call the
+                   function at the end of this in order for the new book to
+                   have its own card and remove button displayed on page?*/
+           
+           //form submitted and cleared, allows addBookButton to create another form
+           hasBeenEntered = false;
+           return hasBeenEntered;
+       })
+    }
+})
+
 //getting the div with container class in the index.html
 const container = document.querySelector('.container');
 
