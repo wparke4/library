@@ -63,6 +63,11 @@ for(let i=0; i<myLibrary.length; i++) {
     let button = document.createElement('button');
     container.appendChild(button);
     button.innerText = "Remove Book";
+    button.setAttribute('id', i);
+    button.addEventListener('click', function() {
+        myLibrary.splice(i, 1);
+    }
+    );
     
     let author = myLibrary[i].author;
     let title = myLibrary[i].title;
